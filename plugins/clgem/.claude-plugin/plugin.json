@@ -1,0 +1,9 @@
+{
+  "name": "clgem",
+  "description": "Leader Claude (Fable 5) multi-agent orchestration: architecture/planning/verification/task allocation by the leader, cost-optimized worker agents, Gemini CLI critical review gate, Comm.md coordination ledger, /goal-driven iteration.",
+  "version": "1.0.0",
+  "author": {
+    "name": "hongh",
+    "email": "hongh815@gmail.com"
+  }
+}
