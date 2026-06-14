@@ -8,7 +8,7 @@ judgment; spend Haiku-class tokens on everything mechanical.**
 
 | Role | Model | Agent type | Responsibility | Activation trigger |
 | --- | --- | --- | --- | --- |
-| **Leader Claude** | `Fable 5` (the main session — never spawned) | — | Architecture & design, planning, task allocation, verification, all Comm.md writes, final user-facing reporting. | Always. |
+| **Leader Claude** | `Fable 5`, fallback `Opus 4.8` (the main session — never spawned) | — | Architecture & design, planning, task allocation, verification, all Comm.md writes, final user-facing reporting. | Always. |
 | **Implementer** | `sonnet` | general-purpose | Feature implementation, multi-file edits, debugging, writing tests — faithful execution of Leader's design. | Any task that writes non-trivial code. |
 | **Scout** | `haiku` | Explore | Codebase reconnaissance, locating files/symbols, summarizing existing behavior. Read-only. | Before planning, or whenever Leader needs facts about the code. |
 | **Mechanic** | `haiku` | general-purpose | Mechanical/repetitive edits: renames, formatting, config tweaks, doc updates, applying a pattern Leader already specified exactly. | Bounded tasks with no design judgment. |
@@ -17,6 +17,11 @@ judgment; spend Haiku-class tokens on everything mechanical.**
 
 ## Model selection rules (token economy)
 
+- **Leader model & fallback**: Leader Claude runs on **Fable 5**. If Fable 5 is
+  unavailable in the session, the Leader falls back to **Opus 4.8**
+  (`claude-opus-4-8`) — never to a worker-tier model (sonnet/haiku), because the
+  Leader's judgment is the backbone of the whole loop. Record the active Leader
+  model in Comm.md at Step 0.
 - Default workers to **sonnet** for anything involving code judgment; drop to
   **haiku** when the task is fully specified and mechanical. When unsure between
   the two, ask: "could this worker make a wrong design decision?" If no — haiku.
