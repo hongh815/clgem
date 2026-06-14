@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(gh auth status)",
+      "PowerShell($root = \"C:\\\\Users\\\\hongh\\\\OneDrive\\\\바탕 화면\\\\skills\\\\clgem-marketplace\"; New-Item -ItemType Directory -Force \"$root\\\\.claude-plugin\" | Out-Null; New-Item -ItemType Directory -Force \"$root\\\\plugins\\\\clgem\\\\.claude-plugin\" | Out-Null; New-Item -ItemType Directory -Force \"$root\\\\plugins\\\\clgem\\\\skills\" | Out-Null; Copy-Item -Recurse \"C:\\\\Users\\\\hongh\\\\.claude\\\\skills\\\\clgem\" \"$root\\\\plugins\\\\clgem\\\\skills\\\\clgem\"; Get-ChildItem -Recurse $root | Select-Object FullName)"
+    ]
+  }
+}
