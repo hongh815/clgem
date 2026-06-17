@@ -61,7 +61,8 @@ Before any task is assigned, write a `/goal` block at the top of Comm.md:
   1. <verifiable criterion — something you can check, not a vibe>
   2. ...
 - **Definition of done**: <what evidence closes the goal>
-- **Completion**: 0%
+- **Assumptions**: <defaults you chose where the request was ambiguous>
+- **Completion**: 0%  <!-- = (criteria fully met ÷ total criteria) × 100 -->
 ```
 
 The goal is the contract for the whole session. Every Gemini review and every
@@ -100,10 +101,15 @@ Repeat until the goal's acceptance criteria are met:
    - **SUPPLEMENT** — mostly right; spawn a follow-up task for the gaps.
    - **ACCEPT** — review passed, or findings are out of scope; mark `done`, note
      ignored findings so they aren't silently lost.
-5. **Update the goal** — recompute the Completion percentage against the
-   acceptance criteria. If all criteria are met, finish. If progress has stalled
-   (two REDO cycles on the same task), stop and escalate to the user with the
-   options instead of looping forever.
+5. **Update the goal** — recompute Completion as
+   `(criteria fully met ÷ total criteria) × 100`, counting a criterion as met
+   only when its closing evidence (per Definition of done) actually exists. If all
+   criteria are met, finish. Otherwise, stop and escalate to the user — with the
+   options, instead of looping forever — if either stall guard trips:
+   - **Per-task stall**: the same task reaches two REDO cycles.
+   - **Global stall**: Completion does not increase across two consecutive loop
+     iterations. This catches the case the per-task guard misses — several
+     different tasks each churning once while overall progress flatlines.
 
 ### Worker prompt template
 

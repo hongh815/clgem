@@ -12,7 +12,7 @@ Leader transcribes. Append-only — never delete history.
   1. <verifiable criterion>
 - **Definition of done**: <closing evidence>
 - **Assumptions**: <defaults Leader chose where the request was ambiguous>
-- **Completion**: 0%
+- **Completion**: 0%  <!-- = (criteria fully met ÷ total criteria) × 100 -->
 
 ## Status Summary
 
