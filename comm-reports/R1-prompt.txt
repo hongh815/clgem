@@ -1,0 +1,25 @@
+You are an independent critical reviewer. Your job is to find what is wrong, missing, or divergent from the goal — not to be agreeable. If you cannot verify a claim, say so. Answer in Korean.
+
+PROJECT GOAL: clgem 스킬을 "사용자의 비서(assistant)형 AI"가 아니라 "상시 켜진 Claude를 팀의 한 구성원(teammate)"으로 운용하기 위한 구조적 부족점을 근거와 함께 도출하고 우선순위·개선안을 제시한다. 사용자 최우선 관심: 작업내역·정보·취합 데이터를 한 곳에 누적하되 토큰을 절약하면서도 지속 업무가 가능한 단일 영속 데이터 저장소/장치.
+ACCEPTANCE CRITERIA: (1) 역할이 비서/일회성으로 전제된 지점을 파일 근거와 함께 추출 (2) 6개 축(데이터저장소/정체성/상시성/능동성/협업인터페이스/신뢰권한)별 부족점을 근거와 함께 정리 (3) 부족점별 우선순위와 구체 개선안 (4) 독립 리뷰로 검증.
+
+TASK T2: 위 goal과 T1이 수집한 사실을 토대로 부족점 분석 보고서 작성. 산출물은 comm-reports/T2.md.
+
+WORKER REPORT:
+STATUS: success
+CHANGED: comm-reports/T2.md 신규 생성(6축 분석 + Top3 + 한계)
+EVIDENCE: 모든 부족점을 파일:라인 인용 또는 "언급 없음" 사실에 묶음. 축①은 3계층 저장소(Comm.md 활성 / comm-index.md 인덱스 / comm-summary.md 롤업) + 선택적 로딩 규칙 + 압축 트리거까지 설계. Top3 = (1)3계층 저장소 (2)Session Checkpoint+재개 프로토콜 (3)Committed Action+Autonomy Tier.
+CONCERNS: 실측 데이터 없음(150줄 트리거는 추정), 추가 파일이 Leader 작성부담 증가 가능, 자동 재개는 harness(CronCreate) 레벨 필요, Autonomy Tier는 enforcement 아닌 지침.
+
+ARTIFACTS: 분석 보고서 전문은 이 디렉터리의 T2.md 에 있다(add-dir로 추가됨). 보고서가 인용한 원본 스킬 파일은 C:\Users\hongh\.claude\skills\clgem\ (SKILL.md, references/agents.md, references/antigravity-review.md, assets/Comm.template.md)에 있다(역시 add-dir). 두 경로를 직접 열어 확인하라.
+
+REVIEW FOR:
+- 정확성: 보고서가 인용한 파일:라인이 실제 내용과 일치하는가? "언급 없음"이라는 단정이 실제로 맞는가(빠뜨린 메커니즘이 스킬에 이미 있는가)?
+- 누락: 팀원화에 중요한데 6축/Top3가 놓친 부족점이 있는가?
+- goal 이탈: 분석이 사용자 최우선 축(토큰 절약형 단일 영속 저장소)에 충분히 답했는가?
+- 미검증 주장 / 과장: 개선안 중 비현실적이거나 기존 제약(Leader 단독 작성 등)을 깨는 것이 있는가?
+- 리스크: 제안한 3계층 저장소가 오히려 토큰/작성부담을 늘릴 위험에 대한 평가.
+
+End with exactly:
+VERDICT: PASS | CONDITIONAL | FAIL
+FINDINGS: <번호 매긴 목록, 가장 치명적인 것부터>

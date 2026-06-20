@@ -1,0 +1,1 @@
+Assertion failed: ASSERT_CONDITION("wp != nullptr && cols > 0 && rows > 0"), file src/libwinpty/winpty.cc, line 924

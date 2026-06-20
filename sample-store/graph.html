@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>clgem sample-store — Knowledge Graph (Weather Dashboard)</title>
+<script src="https://unpkg.com/vis-network@9.1.9/dist/vis-network.min.js"></script>
+<style>
+  html,body{margin:0;height:100%;background:#0f1117;color:#e6e6e6;font-family:system-ui,Segoe UI,Apple SD Gothic Neo,sans-serif}
+  #net{width:100%;height:78vh;border-bottom:1px solid #222}
+  header{padding:10px 16px}
+  h1{font-size:16px;margin:0 0 4px}
+  .sub{font-size:12px;color:#9aa4b2}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;padding:8px 16px;font-size:12px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+</style>
+</head>
+<body>
+<header>
+  <h1>clgem sample-store — 지식 그래프 · Weather Dashboard 프로젝트</h1>
+  <div class="sub">노드 24 · 엣지 27 · 커뮤니티 5 (Agents / Tasks / Components / Decisions / Reviews). 마우스로 드래그·줌, 노드 클릭 시 강조.</div>
+</header>
+<div class="legend">
+  <span><i class="dot" style="background:#e06c75"></i>Agents</span>
+  <span><i class="dot" style="background:#61afef"></i>Tasks</span>
+  <span><i class="dot" style="background:#98c379"></i>Components</span>
+  <span><i class="dot" style="background:#e5c07b"></i>Decisions</span>
+  <span><i class="dot" style="background:#c678dd"></i>Reviews</span>
+  <span><i class="dot" style="background:#56b6c2"></i>Goal</span>
+</div>
+<div id="net"></div>
+<script>
+const groups = {
+  agent:{color:'#e06c75'}, task:{color:'#61afef'}, comp:{color:'#98c379'},
+  dec:{color:'#e5c07b'}, rev:{color:'#c678dd'}, goal:{color:'#56b6c2'}
+};
+const nodes = new vis.DataSet([
+  {id:'goal', label:'Weather Dashboard\n(Goal)', group:'goal', value:30},
+  // agents
+  {id:'leader', label:'Leader Claude', group:'agent', value:18},
+  {id:'scout', label:'Scout', group:'agent', value:8},
+  {id:'impl', label:'Implementer', group:'agent', value:16},
+  {id:'rev', label:'Background Reviewer', group:'agent', value:12},
+  // tasks
+  {id:'T1', label:'T1\nWeatherAPIClient', group:'task', value:14},
+  {id:'T2', label:'T2\nCacheStore', group:'task', value:14},
+  {id:'T3', label:'T3\nDashboardUI', group:'task', value:14},
+  // components
+  {id:'wac', label:'WeatherAPIClient', group:'comp', value:26},
+  {id:'cache', label:'CacheStore', group:'comp', value:18},
+  {id:'ui', label:'DashboardUI', group:'comp', value:18},
+  {id:'cfg', label:'ConfigLoader', group:'comp', value:16},
+  {id:'redis', label:'Redis', group:'comp', value:8},
+  {id:'retry', label:'RetryPolicy', group:'comp', value:8},
+  {id:'card', label:'WeatherCard', group:'comp', value:6},
+  {id:'ow', label:'OpenWeather API', group:'comp', value:10},
+  // decisions
+  {id:'D1', label:'D1 Redis 캐시', group:'dec', value:12},
+  {id:'D2', label:'D2 React UI', group:'dec', value:10},
+  {id:'D3', label:'D3 재시도 정책', group:'dec', value:10},
+  // reviews
+  {id:'R1', label:'R1 (PASS)', group:'rev', value:8},
+  {id:'R2', label:'R2 (CONDITIONAL)', group:'rev', value:8},
+]);
+const E=(f,t,l)=>({from:f,to:t,label:l,font:{size:9,color:'#8b94a3',strokeWidth:0},arrows:'to',color:{color:'#3a4150'}});
+const edges = new vis.DataSet([
+  E('goal','ui','realized by'),
+  E('leader','T1','assigns'), E('leader','T2','assigns'), E('leader','T3','assigns'),
+  E('leader','scout','spawns'), E('leader','impl','spawns'), E('leader','rev','spawns'),
+  E('impl','T1','executes'), E('impl','T2','executes'), E('impl','T3','executes'),
+  E('rev','R1','runs'), E('rev','R2','runs'),
+  E('R1','T1','reviews'), E('R2','T2','reviews'), E('R2','T3','reviews'),
+  E('T2','T1','depends on'), E('T3','T1','depends on'), E('T3','T2','depends on'),
+  E('T1','wac','produces'), E('T2','cache','produces'), E('T3','ui','produces'),
+  E('wac','cfg','reads key from'), E('wac','ow','calls'), E('wac','retry','uses'),
+  E('cache','redis','backed by'), E('cache','wac','caches response of'),
+  E('ui','wac','uses'), E('ui','cfg','reads'), E('ui','cache','benefits from'), E('ui','card','renders'),
+  E('D1','cache','affects'), E('D1','wac','affects'),
+  E('D2','ui','affects'), E('D2','cfg','affects'),
+  E('D3','retry','affects'),
+]);
+const data={nodes,edges};
+const options={
+  groups,
+  nodes:{shape:'dot',font:{color:'#e6e6e6',size:12,face:'Segoe UI'},borderWidth:0,scaling:{min:6,max:34}},
+  edges:{smooth:{type:'continuous'},width:1},
+  physics:{barnesHut:{gravitationalConstant:-7000,springLength:130,springConstant:0.03},stabilization:{iterations:250}},
+  interaction:{hover:true,tooltipDelay:120}
+};
+const net=new vis.Network(document.getElementById('net'),data,options);
+// 클릭 시 이웃 강조
+net.on('click',p=>{
+  if(!p.nodes.length){nodes.forEach(n=>nodes.update({id:n.id,opacity:1}));return;}
+  const id=p.nodes[0];
+  const keep=new Set([id]);
+  edges.forEach(e=>{if(e.from===id)keep.add(e.to);if(e.to===id)keep.add(e.from);});
+  nodes.forEach(n=>nodes.update({id:n.id,opacity:keep.has(n.id)?1:0.15}));
+});
+</script>
+</body>
+</html>

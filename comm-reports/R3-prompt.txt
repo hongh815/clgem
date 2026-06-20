@@ -1,0 +1,25 @@
+당신은 독립적이고 비판적인 리뷰어다. 동의가 아니라 결함·누락·모순·과장을 찾는 게 임무다. 검증 불가한 건 그렇다고 말하라. 한국어로 답하라.
+
+PROJECT GOAL: clgem 스킬을 "비서형 AI"가 아니라 "상시 켜진 Claude를 팀의 한 구성원(teammate)"으로 운용하기 위한 구조 개선. 핵심: 토큰 절약형 단일 영속 데이터 저장소 + 지속 업무.
+
+검토 대상(현재 스킬 파일 전체): C:\Users\hongh\.claude\skills\clgem
+  - SKILL.md
+  - references/agents.md
+  - references/antigravity-review.md
+  - assets/Comm.template.md
+  - assets/comm-index.template.md
+  - assets/comm-summary.template.md
+
+이 스킬은 최근 다음이 적용됨(T3 구현 + T4 보강): 3계층 영속 저장소(+경량 모드 적응형), 재개 프로토콜/Interrupted State, Autonomy Tier + next_action, 기록 정책(워커=축약 / 리뷰·Leader=전문 보존), 재개 빈참조 분기, Tier0/Tier2 agy 경계, comm-summary 비대화 가드, 다중 프로젝트 네임스페이싱.
+
+검토 항목:
+1. 완전성: 위 개선들이 실제로 모두, 일관되게 반영됐는가? 빠진 연결고리/서로 모순되는 서술이 있는가?
+2. 핵심 제약 보존: ①Comm.md 단독 작성자=Leader ②워커는 final message로만 보고 ③모든 완료 태스크는 독립 리뷰 게이트 통과 — 깨지지 않았는가?
+3. 정확성: 깨진 내부 링크/앵커, 중복 섹션, 잘못된 파일명, 모델명/명령 오기, 단계 번호 꼬임 등 실제 결함.
+4. 실용성/과장: 임계값(200줄, 5태스크 등)·경량모드 승격 규칙이 합리적인가? 비현실적이거나 enforcement 불가한 주장을 사실처럼 적었는가?
+5. 팀원화 관점 잔여 부족점: 여전히 비서/일회성 전제가 남아있는 곳이 있는가?
+
+반드시 다음으로 끝내라:
+VERDICT: PASS | CONDITIONAL | FAIL
+FINDINGS: <번호 매긴 목록, 가장 치명적인 것부터, 각 1~3문장, 가능하면 파일:섹션>
+RECOMMENDATION: <Leader 한 줄 권고: ACCEPT/SUPPLEMENT/REDO 중 무엇과 이유>
