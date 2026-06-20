@@ -46,6 +46,19 @@ Status values: `todo` → `in-progress` → `done-pending-review` → `done`
 - EVIDENCE: <verification performed>
 - CONCERNS: <risks the reviewer should probe>
 
+## Connectivity Map (Graphify)
+
+<!-- Standard step — the connectivity map is built by default over the entire designated path
+     (token cost accepted, --mode deep). Omit only when the path holds a single resource
+     with nothing to interconnect; in that rare case, record the reason below. -->
+
+- **Graph built (path & depth)**: <graphed path + whether --mode deep was used / rare exception: single-resource reason>
+- **God nodes (blast radius)**: <core abstractions; tasks touching these are serialized + tightly constrained>
+- **Communities (task seams)**: <detected clusters used as task-decomposition boundaries>
+- **Surprising connections → constraints**: <INFERRED cross-community edges recorded as design constraints in Decision Log>
+- **Knowledge gaps / isolated nodes (completeness watchlist)**: <suspected missing wiring>
+- **Last --update delta**: <new/lost god nodes, new import cycles, remaining gaps after changes>
+
 ## Gemini Review Log
 
 | Id | Task | Verdict | Key findings | Leader decision | Justification |

@@ -40,9 +40,17 @@ TASK <id>: <what the worker was asked to do>
 WORKER REPORT: <the worker's STATUS/CHANGED/EVIDENCE/CONCERNS block>
 ARTIFACTS: <relevant file contents or diff — paste the actual content;
 Gemini cannot read the workspace itself>
+CONNECTIVITY (when a graphify map exists): the post-change graph in `graphify-out/`
+(`GRAPH_REPORT.md` for god nodes / import cycles / knowledge gaps, `graph.json` for raw edges) and
+the pre-change `## Connectivity Map (Graphify)` snapshot from Comm.md. Paste the `GRAPH_REPORT.md`
+content (god nodes, import cycles, knowledge gaps) and the relevant `graph.json` excerpts into the
+prompt — Gemini cannot read the workspace itself; the opus fallback reviewer reads the files directly.
 
 Review for: correctness, missing edge cases, divergence from the goal,
-unverified claims in the report, and risks the worker did not mention.
+unverified claims in the report, risks the worker did not mention, and — when a graphify
+connectivity map exists — **connectivity regression**: a god node that dropped edges it should
+keep, a new import cycle, a newly-created component left isolated (≤1 connection), or a broken
+surprising-connection dependency the plan relied on (cite the specific node/edge).
 
 End with exactly:
 VERDICT: PASS | CONDITIONAL | FAIL
@@ -51,6 +59,24 @@ FINDINGS: <numbered list, most severe first>
 
 Paste real artifact content into the prompt — a review of a summary is a summary
 of a review.
+
+## Connectivity-regression check (when a graphify map exists)
+
+clgem builds a graphify connectivity map as a standard step (see
+[graphify-integration.md](graphify-integration.md)), so every review includes an explicit
+connectivity-regression pass. The reviewer is given the **post-change** graph from `graphify-out/`
+(`GRAPH_REPORT.md` for god nodes, import cycles, and knowledge gaps; `graph.json` for the raw
+edges — pasted into the prompt for Gemini, or read directly by the opus fallback reviewer) and
+compares it against the **pre-change** `## Connectivity Map (Graphify)` snapshot the
+Leader recorded in Comm.md. It fails or conditions the task when the change:
+
+- drops edges from a **god node** it should have preserved,
+- introduces a **new import cycle**,
+- leaves a **newly-created component isolated** (≤1 connection), or
+- breaks a **surprising-connection dependency** the plan relied on.
+
+Each is reported as a numbered FINDING citing the specific node/edge. Connectivity findings are
+evidence the gate weighs — they sharpen, but do not replace, the reviewer's correctness judgment.
 
 ## Logging and the Leader decision
 

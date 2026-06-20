@@ -42,3 +42,9 @@ the reason rather than improvising a different design; design changes are Leader
 Claude's call. Workers always end with the REPORT FORMAT block defined in
 SKILL.md, because their final message is the only channel back to the Leader and
 into Comm.md.
+
+**Connectivity map (graphify).** Building or refreshing the graphify knowledge graph is read-mostly
+reconnaissance that only writes a local `graphify-out/` cache: the Leader may invoke `/graphify`
+directly or assign a **general-purpose** worker to run it. The read-only **Scout** (Explore) can
+interpret an existing graph but cannot write graph files. See
+[references/graphify-integration.md](references/graphify-integration.md).
