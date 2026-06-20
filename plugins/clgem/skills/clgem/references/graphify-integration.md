@@ -30,7 +30,30 @@ reconnaissance + a local cache under `graphify-out/`) — no user confirmation n
 invoke /graphify directly, or assign a general-purpose worker to run it; the read-only Scout
 (Explore) can interpret an existing graph but cannot write graph files.
 
-## Planning-stage usage (acceptance criterion 1)
+## If graphify is not installed (clgem does not bundle it)
+
+graphify is a **separate, third-party** Claude Code skill (by safishamsi —
+https://github.com/sponsors/safishamsi) plus the `graphifyy` PyPI package. clgem **uses** it but
+does **not** bundle or redistribute it. Before the first connectivity build, confirm graphify is
+available — run `graphify --version` (Bash) and check that the `/graphify` skill is present.
+
+If it is **missing**, the Leader **guides the user to install it** instead of failing:
+- Python package: `pip install graphifyy` (or `uv tool install graphifyy`).
+- graphify Claude Code skill: install it into `~/.claude/skills/graphify/` from the graphify
+  project's own source (third-party — obtain it from there; clgem does not ship it).
+
+The `graphifyy` package alone is **not** enough — clgem invokes the `/graphify` **skill**, which in
+turn drives the package, so **both** must be present.
+
+If the user installs it, proceed with the standard build. If graphify **stays unavailable** (the
+user declines, or is offline), clgem **proceeds without the connectivity map** — Step 1.5, the
+worker CONNECTIVITY CONTEXT, and the reviewer connectivity-regression check are skipped — and the
+Leader **records that gap in Comm.md's `## Connectivity Map (Graphify)`** (e.g. "graph skipped:
+graphify not installed — install guided") so it is a deliberate, visible non-step. Never block the
+whole project on this optional external dependency. (You skip here because the tool is **absent**,
+not to save tokens — the comprehensive-build rule above still stands when graphify is available.)
+
+## Planning-stage usage
 
 Before decomposing the goal into tasks (Step 1.5 → Step 2), read three graph signals and let
 them shape the plan:
@@ -48,7 +71,7 @@ them shape the plan:
 Honesty rule: graphify marks edges EXTRACTED / INFERRED / AMBIGUOUS. Treat INFERRED and
 AMBIGUOUS edges as **hypotheses to verify**, not facts — confirm before relying on them.
 
-## Worker-context usage — understanding while working (acceptance criterion 7)
+## Worker-context usage — understanding while working
 
 When assigning a task, give the worker the **connectivity context** for what it will touch, pulled
 from the graph: which nodes **depend on** the target (callers/dependents = blast radius), what data or
@@ -58,7 +81,7 @@ caller or break a hidden dependency. Populate the worker prompt's **CONNECTIVITY
 `graphify explain <node>` and `graphify query "what connects to X"`, and mark INFERRED / AMBIGUOUS
 edges as hypotheses, not facts.
 
-## Completeness-check usage (acceptance criterion 2)
+## Completeness-check usage
 
 During Step 3's "Update the goal" step and again at Finishing:
 

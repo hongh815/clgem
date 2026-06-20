@@ -48,11 +48,11 @@ Status values: `todo` → `in-progress` → `done-pending-review` → `done`
 
 ## Connectivity Map (Graphify)
 
-<!-- Standard step — the connectivity map is built by default over the entire designated path
-     (token cost accepted, --mode deep). Omit only when the path holds a single resource
-     with nothing to interconnect; in that rare case, record the reason below. -->
+<!-- 표준 단계 — graphify 연결성 맵은 기본적으로 전체 경로를 빌드해 채운다(토큰비용 수용·--mode deep, 표준 빌드).
+     생략은 (a) 경로에 리소스가 사실상 하나뿐이거나 (b) graphify 미설치(설치 안내했으나 미가용)일 때만이며,
+     그 경우에만 생략 사유를 적는다(예: "graph 생략: graphify 미설치 — 설치 안내함"). -->
 
-- **Graph built (path & depth)**: <graphed path + whether --mode deep was used / rare exception: single-resource reason>
+- **Graph built (path & depth)**: <graphed 경로 + --mode deep 여부 / 드문 예외로 생략 시: single-resource 사유>
 - **God nodes (blast radius)**: <core abstractions; tasks touching these are serialized + tightly constrained>
 - **Communities (task seams)**: <detected clusters used as task-decomposition boundaries>
 - **Surprising connections → constraints**: <INFERRED cross-community edges recorded as design constraints in Decision Log>

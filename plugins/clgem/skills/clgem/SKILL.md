@@ -72,6 +72,13 @@ default and record the assumption in the goal block.
 
 ## Step 1.5 — Build the connectivity map (standard step — map all resources in the path)
 
+**Precondition — graphify availability.** graphify is a third-party skill/package that clgem uses
+but does **not** bundle. Before the first build, confirm it (`graphify --version` + the `/graphify`
+skill); if missing, **guide the user to install it** (`pip install graphifyy` plus the graphify
+skill — see [references/graphify-integration.md](references/graphify-integration.md)). If it stays
+unavailable, proceed without the map and record the gap in Comm.md — never block the project on this
+optional dependency.
+
 Before decomposing the work, build or refresh a **/graphify** knowledge graph over the **entire
 designated path** so you understand how **all its resources** (code, docs, papers, images, video)
 interconnect, then read its **god nodes** (high blast-radius core abstractions), **communities**
