@@ -71,6 +71,39 @@ them shape the plan:
 Honesty rule: graphify marks edges EXTRACTED / INFERRED / AMBIGUOUS. Treat INFERRED and
 AMBIGUOUS edges as **hypotheses to verify**, not facts — confirm before relying on them.
 
+## Directives as living memory — feeding governance into the graph
+
+The graph maps how *resources* connect. clgem also tracks how the user's **standing directives**
+(constraints, remembered facts, stressed priorities, design-central decisions — the DM ledger of
+SKILL.md Step 1.6) connect to those resources, so the same graph that drives task decomposition
+also shows **which directive governs which file**. This is what lets the Leader direct work by
+reading *connections and records together*, not from memory.
+
+Mechanism — keep it simple and honest:
+
+1. **Write directives to a graphed file.** Each captured directive's full text goes into
+   `comm-reports/directives.md` (id, category, the directive, and the resources/modules it names).
+   Because that file sits inside the designated path, graphify ingests it like any other resource.
+   When a directive is **superseded**, mark its entry `Status: superseded` and move it under that
+   file's `## Superseded` heading rather than deleting it — history is preserved, but the next
+   `--update` stops linking it as a **live** governance node, so the graph never re-asserts a
+   constraint the user has retracted.
+2. **Refresh on change.** Whenever a directive is added, changed, or superseded, run
+   `/graphify <path> --update`.
+   graphify links the directive node to the resources it names (a `MUST`/`DESIGN` directive that
+   mentions `auth/session.py` becomes an edge to that node), surfacing a **governance subgraph**
+   over the codebase.
+3. **Read it when directing work.** Before assigning a task, follow the directive→resource edges
+   for the task's blast radius to find every active directive that touches it, and copy those
+   `U`-ids into the worker's **ACTIVE DIRECTIVES** field. A directive recorded but not wired to the
+   task it governs is a directive forgotten.
+
+**Honesty rule for directive nodes.** Directive→resource edges are **authored** (clgem-supplied
+governance), categorically different from graphify's EXTRACTED code edges and from its INFERRED
+hypotheses. Never present an authored governance edge as a discovered code fact, and never let a
+directive node inflate god-node/centrality reasoning about the *code* — keep the two layers
+legible. The directive layer answers "what must hold"; the extracted layer answers "what is."
+
 ## Worker-context usage — understanding while working
 
 When assigning a task, give the worker the **connectivity context** for what it will touch, pulled
@@ -98,14 +131,14 @@ During Step 3's "Update the goal" step and again at Finishing:
 
 ## How it pairs with the review gate
 
-The independent reviewer (the Gemini CLI reviewer, or the opus Fallback Reviewer) runs an explicit
+The independent reviewer (Antigravity `agy` via `scripts/agy_review.py`, or the opus Fallback Reviewer) runs an explicit
 **connectivity-regression check**: it reads the post-change graph in `graphify-out/`
 (`GRAPH_REPORT.md` + `graph.json`) and compares it against the pre-change `## Connectivity Map
 (Graphify)` snapshot in Comm.md, failing or conditioning the task on a dropped god-node edge, a new
 import cycle, a newly-isolated component, or a broken surprising-connection dependency. These
 connectivity findings are **evidence that feeds the review gate** — they sharpen, but do not
 replace, the reviewer's correctness judgment. See
-[gemini-review.md](gemini-review.md) for the review procedure.
+[antigravity-review.md](antigravity-review.md) for the review procedure.
 
 ## Cost & honesty
 

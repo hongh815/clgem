@@ -12,8 +12,8 @@ judgment; spend Haiku-class tokens on everything mechanical.**
 | **Implementer** | `sonnet` | general-purpose | Feature implementation, multi-file edits, debugging, writing tests — faithful execution of Leader's design. | Any task that writes non-trivial code. |
 | **Scout** | `haiku` | Explore | Codebase reconnaissance, locating files/symbols, summarizing existing behavior. Read-only. | Before planning, or whenever Leader needs facts about the code. |
 | **Mechanic** | `haiku` | general-purpose | Mechanical/repetitive edits: renames, formatting, config tweaks, doc updates, applying a pattern Leader already specified exactly. | Bounded tasks with no design judgment. |
-| **Fallback Reviewer** | `opus` | general-purpose | Independent critical review — only when the Gemini CLI is unavailable or fails twice. | See references/gemini-review.md. |
-| **Gemini Reviewer** | Gemini CLI (external, separate session) | via Bash | Critical verification of every completed task. | After every task completion. |
+| **Antigravity Reviewer (default)** | `agy` — Gemini 3.1 Pro (High), captured via `scripts/agy_review.py` (`run_in_background`) | Bash (pywinpty capture) | Independent critical review of every completed task; Leader waits (대기중) until it finishes and the verdict is recorded from the out file. Default because agy capture is verified headless on this setup. | After every task completion. |
+| **Fallback Reviewer** | `opus` | general-purpose, `run_in_background: true` | Independent review ONLY when agy capture is unavailable or fails twice; same-vendor (Claude), so independence is weaker. | See [antigravity-review.md](antigravity-review.md) Failure handling. |
 
 ## Model selection rules (token economy)
 
@@ -26,7 +26,8 @@ judgment; spend Haiku-class tokens on everything mechanical.**
   **haiku** when the task is fully specified and mechanical. When unsure between
   the two, ask: "could this worker make a wrong design decision?" If no — haiku.
 - Never spawn an **opus** worker for implementation. Opus appears only as the
-  fallback reviewer, because review quality is the safety net of the whole loop.
+  fallback reviewer (used when the Antigravity CLI is unavailable or fails twice),
+  because review quality is the safety net of the whole loop.
 - Leader Claude (Fable 5) does not delegate what it can answer in one sentence,
   and does not implement what a sonnet worker can — both directions waste tokens.
 - Prefer one well-scoped worker over several overlapping ones; overlapping scopes
@@ -43,8 +44,8 @@ Claude's call. Workers always end with the REPORT FORMAT block defined in
 SKILL.md, because their final message is the only channel back to the Leader and
 into Comm.md.
 
-**Connectivity map (graphify).** Building or refreshing the graphify knowledge graph is read-mostly
-reconnaissance that only writes a local `graphify-out/` cache: the Leader may invoke `/graphify`
-directly or assign a **general-purpose** worker to run it. The read-only **Scout** (Explore) can
-interpret an existing graph but cannot write graph files. See
-[references/graphify-integration.md](references/graphify-integration.md).
+**Connectivity map (graphify).** Building or refreshing the graphify knowledge graph is Tier 0
+reconnaissance: the Leader may invoke `/graphify` directly or assign a **general-purpose** worker to
+run it (it writes a local `graphify-out/` cache). The read-only **Scout** (Explore) can interpret an
+existing graph but cannot write graph files. See
+[graphify-integration.md](graphify-integration.md).

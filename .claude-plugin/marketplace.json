@@ -7,7 +7,7 @@
     {
       "name": "clgem",
       "source": "./plugins/clgem",
-      "description": "Leader Claude (Fable 5) multi-agent orchestration with cost-optimized worker models, Gemini CLI critical review gate, Comm.md coordination ledger, and /goal-driven iteration."
+      "description": "Leader Claude (Fable 5) multi-agent orchestration with cost-optimized worker models, Antigravity CLI (agy) critical review gate, Comm.md coordination ledger, and /goal-driven iteration."
     }
   ]
 }
