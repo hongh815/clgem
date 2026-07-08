@@ -34,9 +34,9 @@ Keep under 10 lines. Full /goal block remains in Comm.md.>
 - **Rationale**: <why — constraints, tradeoffs, alternatives rejected>
 - **Impact**: <tasks or files affected>
 
-## Antigravity Reviews (full archive)
+## Codex Reviews (full archive)
 
-<!-- When a task reaches done, its full agy review (verdict + complete findings +
+<!-- When a task reaches done, its full codex review (verdict + complete findings +
      Leader's decision rationale) is moved here INTACT from Comm.md — never condensed.
      comm-index.md keeps only a one-line pointer (id + verdict) back to here.
 
@@ -50,7 +50,7 @@ Keep under 10 lines. Full /goal block remains in Comm.md.>
      On resume: read this section only when you need a specific past review finding;
      do NOT load the full archive by default. -->
 
-### R1 — review of T1 (agy / Gemini 3.1 Pro (High))
+### R1 — review of T1 (codex / gpt-5.5 high reasoning)
 
 - **Date**: <YYYY-MM-DD HH:MM TZ>
 - **VERDICT**: <PASS | CONDITIONAL | FAIL>
@@ -60,7 +60,7 @@ Keep under 10 lines. Full /goal block remains in Comm.md.>
 
 ## Known Risks & Deferred Items
 
-<!-- Risks flagged by Antigravity reviews, items deferred from Open Items, stall events. -->
+<!-- Risks flagged by Codex reviews, items deferred from Open Items, stall events. -->
 
 - <YYYY-MM-DD HH:MM TZ> RISK: <description>
 - <YYYY-MM-DD HH:MM TZ> DEFERRED: <description> (reason: <why deferred>)
@@ -72,7 +72,7 @@ Keep under 10 lines. Full /goal block remains in Comm.md.>
 Recommended resume reading order:
 1. **This file (comm-summary.md) — top sections first**: Project Goal, Completed Work,
    Architectural Decisions, Known Risks, Session Resume Checklist, Leader Profile.
-   Read `## Antigravity Reviews` **only if** you need a specific past review finding —
+   Read `## Codex Reviews` **only if** you need a specific past review finding —
    do not load the full archive by default.
 2. **Comm.md — Status Summary only** (3 lines + "Next action" pointer).
 3. **Comm.md — Task Board** (current loop tasks).

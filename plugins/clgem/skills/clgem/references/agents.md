@@ -1,8 +1,8 @@
 # clgem Agent Roster — Roles and Model Assignment
 
-This file replaces the Codex-era `AGENTS.md`. It defines who does what and which
-model each role runs on. The guiding principle: **spend Fable-class tokens only on
-judgment; spend Haiku-class tokens on everything mechanical.**
+This file defines who does what and which model each role runs on. The guiding
+principle: **spend Fable-class tokens only on judgment; spend Haiku-class tokens
+on everything mechanical.**
 
 ## Role table
 
@@ -12,8 +12,8 @@ judgment; spend Haiku-class tokens on everything mechanical.**
 | **Implementer** | `sonnet` | general-purpose | Feature implementation, multi-file edits, debugging, writing tests — faithful execution of Leader's design. | Any task that writes non-trivial code. |
 | **Scout** | `haiku` | Explore | Codebase reconnaissance, locating files/symbols, summarizing existing behavior. Read-only. | Before planning, or whenever Leader needs facts about the code. |
 | **Mechanic** | `haiku` | general-purpose | Mechanical/repetitive edits: renames, formatting, config tweaks, doc updates, applying a pattern Leader already specified exactly. | Bounded tasks with no design judgment. |
-| **Antigravity Reviewer (default)** | `agy` — Gemini 3.1 Pro (High), captured via `scripts/agy_review.py` (`run_in_background`) | Bash (pywinpty capture) | Independent critical review of every completed task; Leader waits (대기중) until it finishes and the verdict is recorded from the out file. Default because agy capture is verified headless on this setup. | After every task completion. |
-| **Fallback Reviewer** | `opus` | general-purpose, `run_in_background: true` | Independent review ONLY when agy capture is unavailable or fails twice; same-vendor (Claude), so independence is weaker. | See [antigravity-review.md](antigravity-review.md) Failure handling. |
+| **Codex Reviewer (default)** | `codex` — gpt-5.5 (high reasoning) via `codex exec` (`run_in_background`) | Bash (native headless) | Independent critical review of every completed task; Leader waits (대기중) until it finishes and the verdict is recorded from the out file (`-o`). Default because `codex exec` runs headlessly out of the box. | After every task completion. |
+| **Fallback Reviewer** | `opus` | general-purpose, `run_in_background: true` | Independent review ONLY when `codex exec` is unavailable or fails twice; same-vendor (Claude), so independence is weaker. | See [codex-review.md](codex-review.md) Failure handling. |
 
 ## Model selection rules (token economy)
 
@@ -26,7 +26,7 @@ judgment; spend Haiku-class tokens on everything mechanical.**
   **haiku** when the task is fully specified and mechanical. When unsure between
   the two, ask: "could this worker make a wrong design decision?" If no — haiku.
 - Never spawn an **opus** worker for implementation. Opus appears only as the
-  fallback reviewer (used when the Antigravity CLI is unavailable or fails twice),
+  fallback reviewer (used when the Codex CLI is unavailable or fails twice),
   because review quality is the safety net of the whole loop.
 - Leader Claude (Fable 5) does not delegate what it can answer in one sentence,
   and does not implement what a sonnet worker can — both directions waste tokens.

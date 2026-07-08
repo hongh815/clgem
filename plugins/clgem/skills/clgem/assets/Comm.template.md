@@ -52,7 +52,7 @@ Update on every state change — this is the first thing a resumed session reads
 - **Interrupted at**: <YYYY-MM-DD HH:MM TZ>
 - **In-progress tasks**: <T-ids and their last known state>
 - **Last worker output summary**: <one sentence per task>
-- **Next action on resume**: <what Leader must do first — e.g., "collect T3 report, then run agy review">
+- **Next action on resume**: <what Leader must do first — e.g., "collect T3 report, then run codex review">
 
 ## Agent Roster
 
@@ -64,7 +64,7 @@ Update on every state change — this is the first thing a resumed session reads
 | Implementer | sonnet | Standby | — |
 | Scout | haiku | Standby | — |
 | Mechanic | haiku | Standby | — |
-| Antigravity Reviewer (default·captured) | agy / Gemini 3.1 Pro (High) via scripts/agy_review.py | Standby | — |
+| Codex Reviewer (default·headless) | codex exec / gpt-5.5 (high reasoning) | Standby | — |
 | Fallback Reviewer | opus (run_in_background) | Standby | — |
 
 ## Task Board
@@ -104,9 +104,9 @@ Status values: `todo` → `in-progress` → `done-pending-review` → `done`
 - **Knowledge gaps / isolated nodes (completeness watchlist)**: <누락 의심 노드>
 - **Last --update delta**: <변경 후 새 god node/사이클/남은 gap>
 
-## Antigravity Review Log
+## Codex Review Log
 
-<!-- agy reviews are recorded IN FULL, well-organized — never condensed to a bare
+<!-- codex reviews are recorded IN FULL, well-organized — never condensed to a bare
      verdict. The table is for at-a-glance scanning; the full verdict + complete
      findings go in the per-review block below it. On done, move the full block to
      comm-summary.md and leave a one-line pointer in comm-index.md. -->
@@ -115,7 +115,7 @@ Status values: `todo` → `in-progress` → `done-pending-review` → `done`
 | --- | --- | --- | --- |
 | R1 | T1 | <PASS/CONDITIONAL/FAIL> | <REDO/SUPPLEMENT/ACCEPT> |
 
-### R1 — review of T1 (agy / Gemini 3.1 Pro (High))
+### R1 — review of T1 (codex / gpt-5.5 high reasoning)
 - **VERDICT**: <PASS | CONDITIONAL | FAIL>
 - **FINDINGS** (complete, most severe first):
   1. <finding, kept in full>

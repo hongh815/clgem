@@ -131,14 +131,14 @@ During Step 3's "Update the goal" step and again at Finishing:
 
 ## How it pairs with the review gate
 
-The independent reviewer (Antigravity `agy` via `scripts/agy_review.py`, or the opus Fallback Reviewer) runs an explicit
+The independent reviewer (Codex `codex exec`, or the opus Fallback Reviewer) runs an explicit
 **connectivity-regression check**: it reads the post-change graph in `graphify-out/`
 (`GRAPH_REPORT.md` + `graph.json`) and compares it against the pre-change `## Connectivity Map
 (Graphify)` snapshot in Comm.md, failing or conditioning the task on a dropped god-node edge, a new
 import cycle, a newly-isolated component, or a broken surprising-connection dependency. These
 connectivity findings are **evidence that feeds the review gate** — they sharpen, but do not
 replace, the reviewer's correctness judgment. See
-[antigravity-review.md](antigravity-review.md) for the review procedure.
+[codex-review.md](codex-review.md) for the review procedure.
 
 ## Cost & honesty
 

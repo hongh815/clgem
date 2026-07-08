@@ -3,12 +3,12 @@ name: clgem
 description: >-
   Claude-led multi-agent project orchestration ("clgem"). Leader Claude (Fable 5)
   designs the architecture, plans, allocates tasks to cost-optimized worker agents,
-  and verifies results; a separate Antigravity CLI (`agy`, Gemini 3.1 Pro (High)) session
+  and verifies results; a separate Codex CLI (`codex`, gpt-5.5 high reasoning) session
   critically reviews every completed task; all coordination is logged in Comm.md;
   work iterates against a /goal until acceptance criteria are met. Use this skill
   whenever the user invokes /clgem, mentions clgem or Leader Claude, asks to run an
   entire project systematically with an orchestrated agent team, wants Comm.md-based
-  agent coordination, asks for Antigravity-verified execution, or wants goal-driven
+  agent coordination, asks for Codex-verified execution, or wants goal-driven
   iterative delivery of a multi-step project. Do NOT use for one-off requests
   to simply parallelize a task with subagents — those need no orchestration
   ledger or review gate.
@@ -26,10 +26,10 @@ yourself unless a task is trivially small. Your job is:
 3. **Allocation** — assign each task to a worker agent with the cheapest model that
    can do it well (see [references/agents.md](references/agents.md)).
 4. **Verification** — judge every result against the goal, informed by the
-   Antigravity CLI's independent critical review.
+   Codex CLI's independent critical review.
 
-Worker agents execute faithfully and report back; a **separate Antigravity CLI
-(`agy`) session** running **Gemini 3.1 Pro (High)** reviews every completed task
+Worker agents execute faithfully and report back; a **separate Codex CLI
+(`codex`) session** running **gpt-5.5 (high reasoning)** reviews every completed task
 critically; **Comm.md** is the single shared ledger
 that lets you track progress in real time and plan the next step. Work continues
 until the **/goal** acceptance criteria are met — not until the first draft exists.
@@ -52,9 +52,9 @@ until the **/goal** acceptance criteria are met — not until the first draft ex
    discipline** (triggers below) from the start; in Lightweight mode keep the
    companion files but defer compression until a promotion trigger fires.
    If `Comm.md` already exists, follow the **Resume Protocol** below.
-2. Check the review channel: run `agy --version` (Bash). If the Antigravity CLI is
+2. Check the review channel: run `codex --version` (Bash). If the Codex CLI is
    unavailable, record that in Comm.md and use the fallback reviewer defined in
-   [references/antigravity-review.md](references/antigravity-review.md).
+   [references/codex-review.md](references/codex-review.md).
 3. Read [references/agents.md](references/agents.md) for the role and model table
    before spawning any worker.
 4. Confirm the Leader model: Leader Claude runs on **Fable 5**. If Fable 5 is not
@@ -86,7 +86,7 @@ Read in this order — stop as soon as you have enough context to act:
 **Full Comm.md top-to-bottom reading is for audits only — not routine resume.**
 When reading `comm-summary.md` on resume, prioritize its top sections (goal,
 Completed Work, Architectural Decisions, Session Resume Checklist); read the
-full `## Antigravity Reviews` archive only if you need to revisit a specific
+full `## Codex Reviews` archive only if you need to revisit a specific
 review finding — do not load the full archive by default.
 If `comm-summary.md` contains a `## Leader Profile`, read it to restore
 project-specific judgment principles before making any new decisions.
@@ -109,7 +109,7 @@ Before any task is assigned, write a `/goal` block at the top of Comm.md:
 - **Completion**: 0%  <!-- = (criteria fully met ÷ total criteria) × 100 -->
 ```
 
-The goal is the contract for the whole session. Every Antigravity review and every
+The goal is the contract for the whole session. Every Codex review and every
 Leader decision references it. If the user's request is ambiguous on a point that
 changes the architecture, ask before setting the goal; otherwise choose a sensible
 default and record the assumption in the goal block.
@@ -196,7 +196,7 @@ into the Leader Decision Log as a design constraint.
 
 Design the architecture yourself at this step — workers implement your design;
 they do not invent their own. Put load-bearing design decisions in the Leader
-Decision Log so workers and the Antigravity reviewer can see the rationale. Read the
+Decision Log so workers and the Codex reviewer can see the rationale. Read the
 **Directives & Memory ledger** as you plan: every `MUST`/`DESIGN` directive is a hard
 constraint on the task shapes, and any design-central decision you make here is itself a
 `DESIGN` directive — capture it back into the ledger (Step 1.6) so it survives the session.
@@ -234,20 +234,24 @@ Repeat until the goal's acceptance criteria are met:
    essentials into Comm.md (see Comm.md discipline below) and mark the task
    `done-pending-review`.
 3. **Independent review** — for every completed task, run an independent critical
-   review per [references/antigravity-review.md](references/antigravity-review.md).
+   review per [references/codex-review.md](references/codex-review.md).
    Default = **automated background review with Leader waiting**: mark Comm.md Status
-   `Claude 대기중 — R<id> 리뷰 완료·기록까지 대기`, spawn **agy captured via
-   `scripts/agy_review.py`** in the background (`run_in_background: true`), and do
+   `Claude 대기중 — R<id> 리뷰 완료·기록까지 대기`, spawn **`codex exec` (headless,
+   gpt-5.5 high reasoning, verdict written via `-o`)** in the background
+   (`run_in_background: true`), and do
    not advance the loop until it finishes and the verdict is read from
    `comm-reports/R<id>-out.txt`. The **opus Fallback Reviewer** (a `general-purpose`
-   `opus` worker) is used only when agy capture fails twice; a live agy interactive
-   window is an **optional** human-watch mode (and optional dual review) — see the
-   reference. Log the full verdict + findings in Comm.md's Review Log (reviews are
+   `opus` worker) is used only when `codex exec` fails twice. When a finding is
+   ambiguous or Leader disagrees with it, **resume the review session for follow-up
+   dialogue** (`codex exec resume`, Tier 0, 1–2 questions max) before deciding —
+   see the reference. After every review, **report the verdict, key findings, and
+   the Leader decision to the user in chat** (the user's language); the user never
+   needs to read the raw review session. Log the full verdict + findings in Comm.md's Review Log (reviews are
    never condensed). When a connectivity map exists, the review also runs a
    **connectivity-regression check** — god-node edges intact, no new import cycle, no
    newly-isolated component, no broken surprising-connection dependency — against the
    pre-change Connectivity Map snapshot (see
-   [references/antigravity-review.md](references/antigravity-review.md)). The review also runs a
+   [references/codex-review.md](references/codex-review.md)). The review also runs a
    **directive-compliance check**: the work must not violate any `active` `MUST`/`DESIGN`
    directive whose `Governs` set it touches — pass the relevant `U`-ids to the reviewer as
    acceptance constraints.
@@ -294,7 +298,7 @@ REPORT FORMAT: End your final message with exactly:
 ```
 
 The REPORT FORMAT matters because the worker's final message is the only thing
-returned to you — it must carry everything Comm.md and the Antigravity reviewer need.
+returned to you — it must carry everything Comm.md and the Codex reviewer need.
 
 ## Comm.md discipline
 
@@ -305,7 +309,7 @@ returned to you — it must carry everything Comm.md and the Antigravity reviewe
   Each task's durable detail belongs in `comm-reports/T<id>.md` **by default** (not
   only for long-running workers); `comm-index.md` is the living one-line registry of
   tasks/decisions/Q&A; `comm-summary.md` is the rolling rollup (goal, decision
-  rationale, full agy reviews, resume checklist). `Comm.md` holds only the **active
+  rationale, full codex reviews, resume checklist). `Comm.md` holds only the **active
   session state** and links out to the others. At every state change, update the
   file that record belongs in — not just Comm.md.
 - **Timestamp every entry with date *and* time** (e.g. `2026-06-21 08:40 KST`), not
@@ -330,7 +334,7 @@ on who produced it:
   `STATUS`, the load-bearing `CHANGED` artifacts, the key `EVIDENCE`, and any `CONCERNS`
   that affect downstream work. The full worker report is preserved verbatim in
   `comm-reports/T<id>.md`, so Comm.md does not need it in full.
-- **Antigravity (`agy`) critical reviews → record in full, well-organized.** Never
+- **Codex (`codex`) critical reviews → record in full, well-organized.** Never
   reduce a review to a bare verdict. Capture the `VERDICT` and the **complete** findings
   list (numbered, most severe first), tidied for readability. The reviewer's independent
   judgment is the safety net of the loop — discarding its detail defeats the gate.
@@ -340,7 +344,7 @@ on who produced it:
   it to a stub.
 
 This asymmetry survives compression: worker detail lives in `comm-reports/`, while
-agy reviews and Leader reasoning move **intact** into `comm-summary.md` — never
+codex reviews and Leader reasoning move **intact** into `comm-summary.md` — never
 collapsed to a footnote.
 
 ### Lightweight mode (small projects)
@@ -395,8 +399,8 @@ is back under 200 before continuing.
    `comm-reports/T<id>.md` (create the file if it doesn't exist, appending if it
    does). Remove the `### T<id>` block from `## Worker Reports` in Comm.md. Add a
    one-row summary to `comm-index.md`'s Task Registry. For the corresponding
-   Antigravity review, move its **full** verdict + findings to `comm-summary.md`
-   (per the Recording policy — agy reviews are preserved intact, not condensed), and
+   Codex review, move its **full** verdict + findings to `comm-summary.md`
+   (per the Recording policy — codex reviews are preserved intact, not condensed), and
    leave only a one-line pointer (id + verdict) in `comm-index.md`'s Task Registry row.
 2. **Loop iteration ends** → move all Decision Log entries beyond the 5 most recent
    to `comm-summary.md` under `## Architectural Decisions`. Keep only the 5 most
@@ -406,14 +410,14 @@ is back under 200 before continuing.
    Summary`, `## /goal`, and `## Directives & Memory` (active directives only) sections
    are never compressed — they stay in Comm.md. When a directive is superseded, move its
    rationale to `comm-summary.md`'s `## Leader Profile` and drop it from the active table.
-4. **`comm-summary.md` `## Antigravity Reviews` grows excessively large** → for the
+4. **`comm-summary.md` `## Codex Reviews` grows excessively large** → for the
    oldest fully-resolved reviews (verdict is final, no open SUPPLEMENT work), condense
    each to a "verdict + 2-3 line key-findings summary" inline in `comm-summary.md` and
    move the full text to `comm-reports/reviews/R<id>.md`, leaving a one-line pointer
    (`→ full text: comm-reports/reviews/R<id>.md`) in its place. The **most recent
    reviews and any review with an in-progress SUPPLEMENT** always retain their full
    text in `comm-summary.md` — never condense active or recent reviews. (This is
-   consistent with the Recording policy: active/recent agy reviews remain intact;
+   consistent with the Recording policy: active/recent codex reviews remain intact;
    only archived, fully-resolved reviews are condensed, and their full text is preserved
    in `comm-reports/reviews/`.)
 
@@ -434,7 +438,7 @@ or Leader detects the session is about to terminate), Leader must write or updat
 - **Interrupted at**: <YYYY-MM-DD HH:MM TZ>
 - **In-progress tasks**: <T-ids and their last known state>
 - **Last worker output summary**: <one sentence per task>
-- **Next action on resume**: <precise first action — e.g., "Run agy review on T3 report, then decide ACCEPT/REDO">
+- **Next action on resume**: <precise first action — e.g., "Run codex review on T3 report, then decide ACCEPT/REDO">
 ```
 
 On the next session resume, read `## Interrupted State` (if present), act on
@@ -448,9 +452,9 @@ the goal is predictable, trustworthy initiative, not autonomous overreach.
 
 | Tier | Category | Examples | Action |
 | --- | --- | --- | --- |
-| **0** | Always permitted — no confirmation needed | Running agy reviews (launching the separate agy console/process is always allowed — the review gate is the loop's safety net, never gated by Tier 2); writing Comm.md / comm-index.md / comm-summary.md; updating status and checkpoints; read-only reconnaissance (Scout tasks) | Proceed immediately |
+| **0** | Always permitted — no confirmation needed | Running codex reviews (launching the separate codex console/process is always allowed — the review gate is the loop's safety net, never gated by Tier 2); writing Comm.md / comm-index.md / comm-summary.md; updating status and checkpoints; read-only reconnaissance (Scout tasks) | Proceed immediately |
 | **1** | Permitted — log in Decision Log | Spawning a follow-up task that extends an already-ACCEPT'd plan; executing a recorded `next_action` from the Decision Log; re-assigning an `in-progress` task on resume (prior worker report exists) | Proceed; record in Leader Decision Log with `next_action: none` |
-| **2** | Requires user confirmation before acting | Architectural changes; introducing a new task type not in the current plan; any external/irreversible action (MCP calls, network requests, deployment, bulk file deletion, new external integrations). **Exception: launching the agy review session (a separate console/process) is always Tier 0 — see above.** | Stop; present options to user; wait for explicit approval |
+| **2** | Requires user confirmation before acting | Architectural changes; introducing a new task type not in the current plan; any external/irreversible action (MCP calls, network requests, deployment, bulk file deletion, new external integrations). **Exception: launching the codex review session (a separate console/process) is always Tier 0 — see above.** | Stop; present options to user; wait for explicit approval |
 
 Record every Tier 1 decision in the Leader Decision Log with its justification.
 For Tier 2 situations, present the options and rationale to the user — do not
