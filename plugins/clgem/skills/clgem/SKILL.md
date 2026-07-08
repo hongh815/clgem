@@ -304,7 +304,11 @@ returned to you — it must carry everything Comm.md and the Codex reviewer need
 
 - **Leader Claude is the sole writer of Comm.md** (and of `comm-index.md` and
   `comm-summary.md`). Parallel workers editing one file corrupt each other's writes;
-  workers report via their final message and you transcribe.
+  workers report via their final message and you transcribe. The one exception is
+  `comm-reports/T<id>.md`: a worker may write **its own** per-task report file
+  (each task has its own file, so parallel workers never collide). If the worker
+  did not write it, Leader creates it from the worker's final message when the
+  task reaches `done`. The three shared coordination files remain Leader-only.
 - **Actively use all the work-record files — never let everything pile into Comm.md.**
   Each task's durable detail belongs in `comm-reports/T<id>.md` **by default** (not
   only for long-running workers); `comm-index.md` is the living one-line registry of
@@ -338,6 +342,10 @@ on who produced it:
   reduce a review to a bare verdict. Capture the `VERDICT` and the **complete** findings
   list (numbered, most severe first), tidied for readability. The reviewer's independent
   judgment is the safety net of the loop — discarding its detail defeats the gate.
+  Precisely: active and recent reviews always keep their full text where they live;
+  an old, fully-resolved review may later be **summarized in place** by compression
+  trigger 4, but only after its full text is moved to `comm-reports/reviews/R<id>.md`
+  — review detail is never deleted, only relocated.
 - **Leader Claude's own work → record in full, well-organized.** Decisions, design
   rationale, trade-offs weighed, and why a review finding was accepted or overridden.
   This is the reasoning thread future sessions and other agents rely on; never shrink
@@ -360,24 +368,28 @@ finish in a single session, Leader operates in **Lightweight mode**:
   keeps Comm.md lean and the audit trail distributed.
 - **Promote to full three-tier layout** when either trigger fires:
   (a) `Comm.md` exceeds the ~200-line target, or
-  (b) the project spills into a second session. At that point, create `comm-index.md`
-  and `comm-summary.md`, run compression trigger 1 and 2, and continue under the
-  standard three-tier rules.
+  (b) the project spills into a second session. At that point, run compression
+  triggers 1 and 2 (the companion files already exist from Step 0 — promotion
+  activates the compression discipline, it does not create files) and continue
+  under the standard three-tier rules.
 - **The ~200-line mark is unambiguous by mode**: in Lightweight mode the *first*
   crossing triggers **promotion** (this is a one-time transition); once promoted (full
   mode), every later crossing triggers **compression** (trigger 3 below). A project is
   therefore only ever in one mode at a time, so the same number never means two things
   at once. (200 is a default heuristic, not measured — adjust if real usage warrants.)
-- This gives short projects the simplicity advantage of a single file while long
-  projects automatically gain the token-saving, selective-loading benefits of the
-  three-tier layout — an adaptive rule rather than a fixed one.
+- This gives short projects the simplicity advantage of a lean, Comm.md-centered
+  flow (companion files stay terse, no compression passes) while long projects
+  automatically gain the token-saving, selective-loading benefits of the full
+  compression discipline — an adaptive rule rather than a fixed one.
 
 ### Three-tier file layout
 
-The three-tier layout trades the simplicity of a single file for token savings and
-selective loading — a worthwhile swap for large or long-running projects. For small
-projects where simplicity matters more, the Lightweight mode below lets you stay with
-a single `Comm.md` until the project grows to warrant the full layout.
+The three-tier layout trades the simplicity of a Comm.md-centered flow for token
+savings and selective loading — a worthwhile swap for large or long-running
+projects. For small projects where simplicity matters more, the Lightweight mode
+above keeps `Comm.md` as the primary surface (companion files exist but stay
+terse, with no compression passes) until the project grows to warrant the full
+discipline.
 
 If you operate multiple clgem projects concurrently, run each in its own workspace
 (or dedicated subdirectory) — sharing a root causes `Comm.md`, `comm-index.md`, and
@@ -388,7 +400,7 @@ If you operate multiple clgem projects concurrently, run each in its own workspa
 | `Comm.md` | Active session state only | Leader | ≤ 200 lines; compress on triggers below |
 | `comm-index.md` | Full project task registry, one-liner decisions, Q&A | Leader | Append-only; never shrink |
 | `comm-summary.md` | Compressed goal, full decision rationale, Session Resume Checklist, Leader Profile | Leader | Replace/append; always current |
-| `comm-reports/T<id>.md` | Per-task permanent artifacts | Worker (writes) / Leader (links) | Permanent; never modified after task is done |
+| `comm-reports/T<id>.md` | Per-task permanent artifacts | Worker (writes its own file) / Leader (creates it from the final message if missing; links) | Permanent; never modified after task is done |
 
 ### Compression triggers
 
