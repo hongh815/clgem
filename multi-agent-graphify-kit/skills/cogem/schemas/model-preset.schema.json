@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cogem:schema:model-preset:1",
+  "title": "Cogem Concrete Engine Preset",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "preset_id",
+    "roles",
+    "review_passes"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "preset_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "roles": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "provider",
+          "runtime_kind",
+          "runtime_id",
+          "reasoning_effort",
+          "required"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "minLength": 1
+          },
+          "runtime_kind": {
+            "enum": [
+              "model",
+              "managed-agent"
+            ]
+          },
+          "runtime_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reasoning_effort": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "review_passes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "pass_id",
+          "role",
+          "mode",
+          "required",
+          "fresh_session",
+          "inherit_prior_review"
+        ],
+        "properties": {
+          "pass_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "mode": {
+            "enum": [
+              "compliance",
+              "adversarial"
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "fresh_session": {
+            "const": true
+          },
+          "inherit_prior_review": {
+            "type": "boolean"
+          },
+          "risk_triggers": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    }
+  }
+}

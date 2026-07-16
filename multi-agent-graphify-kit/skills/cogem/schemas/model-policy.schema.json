@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cogem:schema:model-policy:2",
+  "title": "Cogem Execution Engine and Review Policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "allow_profile_fallback",
+    "enforce_engine_diversity",
+    "max_concurrent_source_writers",
+    "profiles",
+    "roles",
+    "review_strategy"
+  ],
+  "properties": {
+    "version": {
+      "const": 2
+    },
+    "allow_profile_fallback": {
+      "type": "boolean"
+    },
+    "enforce_engine_diversity": {
+      "type": "boolean"
+    },
+    "max_concurrent_source_writers": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "profiles": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "engine_env",
+          "provider",
+          "engine_kind",
+          "deliberation",
+          "required_capabilities",
+          "fallback_profile"
+        ],
+        "properties": {
+          "engine_env": {
+            "type": "string",
+            "minLength": 1
+          },
+          "provider": {
+            "type": "string",
+            "minLength": 1
+          },
+          "engine_kind": {
+            "enum": [
+              "model",
+              "managed-agent"
+            ]
+          },
+          "deliberation": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required_capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "fallback_profile": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "roles": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "profile",
+          "permissions",
+          "fresh_context",
+          "optional",
+          "distinct_from_roles"
+        ],
+        "properties": {
+          "profile": {
+            "type": "string",
+            "minLength": 1
+          },
+          "permissions": {
+            "enum": [
+              "coordination-write",
+              "scoped-write",
+              "generated-write",
+              "read-only"
+            ]
+          },
+          "fresh_context": {
+            "type": "boolean"
+          },
+          "optional": {
+            "type": "boolean"
+          },
+          "distinct_from_roles": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "review_strategy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required_role",
+        "high_risk_second_pass",
+        "degraded_fallback"
+      ],
+      "properties": {
+        "required_role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "high_risk_second_pass": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "enabled",
+            "reuse_role",
+            "fresh_context",
+            "carry_forward_prior_findings",
+            "prompt_mode"
+          ],
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "reuse_role": {
+              "const": true
+            },
+            "fresh_context": {
+              "const": true
+            },
+            "carry_forward_prior_findings": {
+              "const": false
+            },
+            "prompt_mode": {
+              "const": "adversarial"
+            }
+          }
+        },
+        "degraded_fallback": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "engine_env",
+                "opt_in_env",
+                "mode",
+                "provider",
+                "engine_kind",
+                "deliberation"
+              ],
+              "properties": {
+                "engine_env": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "opt_in_env": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "mode": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "provider": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "engine_kind": {
+                  "enum": [
+                    "model",
+                    "managed-agent"
+                  ]
+                },
+                "deliberation": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

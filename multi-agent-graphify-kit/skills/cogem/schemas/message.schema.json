@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cogem:schema:message:1",
+  "title": "Cogem Agent Message",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "message_id",
+    "agent_id",
+    "task_id",
+    "kind",
+    "body",
+    "created_at"
+  ],
+  "properties": {
+    "message_id": {
+      "type": "string",
+      "pattern": "^MSG-[0-9]{3,}$"
+    },
+    "agent_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+    },
+    "task_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^TASK-[0-9]{3,}$"
+    },
+    "kind": {
+      "enum": [
+        "info",
+        "progress",
+        "question",
+        "answer",
+        "blocker",
+        "review",
+        "handoff"
+      ]
+    },
+    "body": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

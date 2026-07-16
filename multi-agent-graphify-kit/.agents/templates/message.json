@@ -1,0 +1,8 @@
+{
+  "message_id": "MSG-000",
+  "agent_id": "worker-a",
+  "task_id": "TASK-000",
+  "kind": "progress",
+  "body": "The assigned change is implemented and its task-level checks pass.",
+  "created_at": "2026-07-15T10:20:00+09:00"
+}

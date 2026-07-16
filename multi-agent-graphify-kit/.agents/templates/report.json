@@ -1,0 +1,25 @@
+{
+  "report_id": "REPORT-000",
+  "agent_id": "independent-reviewer",
+  "task_id": "TASK-000",
+  "goal_id": null,
+  "kind": "independent-review",
+  "status": "pass",
+  "summary": "The task satisfies its contract and introduces no cross-file inconsistency.",
+  "evidence": [
+    "python scripts/cogem.py validate --root .",
+    "python -m unittest discover -s tests -v"
+  ],
+  "created_at": "2026-07-15T10:35:00+09:00",
+  "review_proof": {
+    "engine": "antigravity-preview-05-2026",
+    "session_id": "replace-with-runtime-session-id",
+    "fresh_context": true,
+    "permissions": "read-only",
+    "source_write_performed": false,
+    "reviewed_tree_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "prior_findings_provided": false,
+    "prompt_mode": "independent",
+    "pass_index": 1
+  }
+}

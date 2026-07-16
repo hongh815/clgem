@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cogem:schema:project-graph:1",
+  "title": "Cogem Project Graph",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "root",
+    "input_fingerprint",
+    "nodes",
+    "edges",
+    "broken_links",
+    "invalid_json",
+    "parallel_safety"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "root": {
+      "type": "string"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "label"
+        ]
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "source",
+          "target",
+          "type"
+        ]
+      }
+    },
+    "broken_links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "source",
+          "target",
+          "reason"
+        ]
+      }
+    },
+    "parallel_safety": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "task_a",
+          "task_b",
+          "parallel_safe",
+          "reason_codes",
+          "details"
+        ]
+      }
+    },
+    "invalid_json": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "source",
+          "line",
+          "column",
+          "reason"
+        ]
+      }
+    },
+    "input_fingerprint": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

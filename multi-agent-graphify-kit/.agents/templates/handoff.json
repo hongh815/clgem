@@ -1,0 +1,16 @@
+{
+  "handoff_id": "HANDOFF-000",
+  "from_agent": "worker-a",
+  "to_agent": "worker-b",
+  "task_id": "TASK-000",
+  "status": "pending",
+  "summary": "The upstream contract is ready for the dependent task.",
+  "artifacts": [
+    "docs/example-output.md"
+  ],
+  "verification": [
+    "The referenced artifact exists",
+    "The acceptance command exits with code 0"
+  ],
+  "created_at": "2026-07-15T10:30:00+09:00"
+}

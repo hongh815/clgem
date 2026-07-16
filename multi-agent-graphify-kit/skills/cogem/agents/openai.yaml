@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cogem"
+  short_description: "Drive delegated project goals through review loops"
+  default_prompt: "Use $cogem to turn my instruction into a goal, delegate the work, review it, and keep iterating until the goal is achieved."

@@ -1,0 +1,108 @@
+{
+  "version": 2,
+  "allow_profile_fallback": false,
+  "enforce_engine_diversity": true,
+  "max_concurrent_source_writers": 2,
+  "profiles": {
+    "reasoning-high": {
+      "engine_env": "COGEM_COORDINATOR_ENGINE",
+      "provider": "openai",
+      "engine_kind": "model",
+      "deliberation": "max",
+      "required_capabilities": [
+        "long_context",
+        "structured_output",
+        "tool_use",
+        "multi_file_reasoning"
+      ],
+      "fallback_profile": null
+    },
+    "balanced": {
+      "engine_env": "COGEM_BALANCED_ENGINE",
+      "provider": "openai",
+      "engine_kind": "model",
+      "deliberation": "high",
+      "required_capabilities": [
+        "structured_output",
+        "tool_use",
+        "code_and_document_editing"
+      ],
+      "fallback_profile": null
+    },
+    "review-high": {
+      "engine_env": "COGEM_REVIEW_ENGINE",
+      "provider": "google",
+      "engine_kind": "managed-agent",
+      "deliberation": "managed",
+      "required_capabilities": [
+        "long_context",
+        "structured_output",
+        "code_execution",
+        "file_analysis",
+        "cross_file_consistency",
+        "adversarial_review"
+      ],
+      "fallback_profile": null
+    }
+  },
+  "roles": {
+    "coordinator": {
+      "profile": "reasoning-high",
+      "permissions": "coordination-write",
+      "fresh_context": false,
+      "optional": false,
+      "distinct_from_roles": []
+    },
+    "graph-analyst": {
+      "profile": "balanced",
+      "permissions": "generated-write",
+      "fresh_context": true,
+      "optional": false,
+      "distinct_from_roles": []
+    },
+    "worker-a": {
+      "profile": "balanced",
+      "permissions": "scoped-write",
+      "fresh_context": true,
+      "optional": false,
+      "distinct_from_roles": []
+    },
+    "worker-b": {
+      "profile": "balanced",
+      "permissions": "scoped-write",
+      "fresh_context": true,
+      "optional": false,
+      "distinct_from_roles": []
+    },
+    "independent-reviewer": {
+      "profile": "review-high",
+      "permissions": "read-only",
+      "fresh_context": true,
+      "optional": false,
+      "distinct_from_roles": [
+        "coordinator",
+        "graph-analyst",
+        "worker-a",
+        "worker-b"
+      ]
+    }
+  },
+  "review_strategy": {
+    "required_role": "independent-reviewer",
+    "high_risk_second_pass": {
+      "enabled": true,
+      "reuse_role": true,
+      "fresh_context": true,
+      "carry_forward_prior_findings": false,
+      "prompt_mode": "adversarial"
+    },
+    "degraded_fallback": {
+      "engine_env": "COGEM_REVIEW_FALLBACK_ENGINE",
+      "opt_in_env": "COGEM_ALLOW_DEGRADED_REVIEW",
+      "mode": "same-provider-fallback",
+      "provider": "openai",
+      "engine_kind": "model",
+      "deliberation": "max"
+    }
+  }
+}

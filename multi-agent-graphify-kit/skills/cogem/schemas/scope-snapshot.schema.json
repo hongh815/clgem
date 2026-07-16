@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cogem:schema:scope-snapshot:1",
+  "title": "Cogem Scope Snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "task_id",
+    "writing_lease",
+    "write_set",
+    "review_level",
+    "graph_fingerprint",
+    "baseline",
+    "last_result"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^TASK-[0-9]{3,}$"
+    },
+    "writing_lease": {
+      "type": "string",
+      "minLength": 1
+    },
+    "write_set": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "review_level": {
+      "enum": [
+        "standard",
+        "high-risk"
+      ]
+    },
+    "graph_fingerprint": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "baseline": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$"
+      }
+    },
+    "last_result": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "task_id",
+            "allowed",
+            "reason_codes",
+            "reasons",
+            "changes",
+            "out_of_scope_paths",
+            "missing_manifests",
+            "checked_tree_hash"
+          ],
+          "properties": {
+            "task_id": {
+              "type": "string",
+              "pattern": "^TASK-[0-9]{3,}$"
+            },
+            "allowed": {
+              "type": "boolean"
+            },
+            "reason_codes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "reasons": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "changes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "path",
+                  "change_type"
+                ],
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "change_type": {
+                    "enum": [
+                      "created",
+                      "modified",
+                      "deleted"
+                    ]
+                  }
+                }
+              }
+            },
+            "out_of_scope_paths": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "missing_manifests": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "checked_tree_hash": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

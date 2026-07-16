@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cogem:schema:report:1",
+  "title": "Cogem Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "report_id",
+    "agent_id",
+    "task_id",
+    "kind",
+    "status",
+    "summary",
+    "evidence",
+    "created_at"
+  ],
+  "properties": {
+    "report_id": {
+      "type": "string",
+      "pattern": "^REPORT-[0-9]{3,}$"
+    },
+    "agent_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+    },
+    "task_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^TASK-[0-9]{3,}$"
+    },
+    "goal_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^GOAL-[0-9]{3,}$"
+    },
+    "kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "pass",
+        "fail",
+        "warn"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "review_proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "engine",
+        "session_id",
+        "fresh_context",
+        "permissions",
+        "source_write_performed",
+        "reviewed_tree_hash",
+        "prior_findings_provided",
+        "prompt_mode",
+        "pass_index"
+      ],
+      "properties": {
+        "engine": {
+          "type": "string",
+          "minLength": 1
+        },
+        "session_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fresh_context": {
+          "const": true
+        },
+        "permissions": {
+          "const": "read-only"
+        },
+        "source_write_performed": {
+          "const": false
+        },
+        "reviewed_tree_hash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "prior_findings_provided": {
+          "type": "boolean"
+        },
+        "prompt_mode": {
+          "enum": [
+            "independent",
+            "adversarial"
+          ]
+        },
+        "pass_index": {
+          "enum": [
+            1,
+            2
+          ]
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "enum": [
+              "independent-review",
+              "adversarial-review"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "review_proof"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "independent-review"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "review_proof": {
+            "properties": {
+              "prompt_mode": {
+                "const": "independent"
+              },
+              "pass_index": {
+                "const": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "adversarial-review"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "review_proof": {
+            "properties": {
+              "prompt_mode": {
+                "const": "adversarial"
+              },
+              "pass_index": {
+                "const": 2
+              },
+              "prior_findings_provided": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "goal-review"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "review_proof"
+        ],
+        "properties": {
+          "task_id": {
+            "const": null
+          },
+          "goal_id": {
+            "type": "string",
+            "pattern": "^GOAL-[0-9]{3,}$"
+          },
+          "review_proof": {
+            "properties": {
+              "prompt_mode": {
+                "const": "independent"
+              },
+              "pass_index": {
+                "const": 1
+              },
+              "prior_findings_provided": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

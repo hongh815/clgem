@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cogem:schema:config:1",
+  "title": "Cogem Configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "objective",
+    "phase",
+    "state_dir",
+    "graph_dir",
+    "comm_file",
+    "model_policy_file",
+    "ignore",
+    "json_reference_keys",
+    "core_paths",
+    "max_concurrent_source_writers",
+    "recent_message_limit"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 1
+    },
+    "phase": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state_dir": {
+      "type": "string",
+      "minLength": 1
+    },
+    "graph_dir": {
+      "type": "string",
+      "minLength": 1
+    },
+    "comm_file": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model_policy_file": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ignore": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "core_paths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "max_concurrent_source_writers": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "recent_message_limit": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "json_reference_keys": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    }
+  }
+}

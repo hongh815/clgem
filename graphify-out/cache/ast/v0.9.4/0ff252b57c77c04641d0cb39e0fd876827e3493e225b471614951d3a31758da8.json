@@ -1,0 +1,1 @@
+{"nodes": [{"id": "pkg_cogem", "label": "cogem", "file_type": "code", "type": "package", "ecosystem": "python", "source_file": "multi-agent-graphify-kit/pyproject.toml", "source_location": "L1", "version": "5.0.0"}], "edges": []}

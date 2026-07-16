@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cogem:schema:goal:1",
+  "title": "Cogem Goal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "goal_id",
+    "objective",
+    "status",
+    "iteration",
+    "criteria",
+    "task_ids",
+    "current_gaps",
+    "review_tree_hash",
+    "blocker",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "goal_id": {
+      "type": "string",
+      "pattern": "^GOAL-[0-9]{3,}$"
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "active",
+        "verifying",
+        "achieved",
+        "blocked"
+      ]
+    },
+    "iteration": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "criteria": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "criterion_id",
+          "description",
+          "status",
+          "evidence"
+        ],
+        "properties": {
+          "criterion_id": {
+            "type": "string",
+            "pattern": "^CRIT-[0-9]{3,}$"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "pending",
+              "pass",
+              "fail"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "task_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^TASK-[0-9]{3,}$"
+      },
+      "uniqueItems": true
+    },
+    "current_gaps": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "review_tree_hash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "blocker": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

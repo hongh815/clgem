@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cogem:schema:task:2",
+  "title": "Cogem Task",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id",
+    "title",
+    "owner",
+    "status",
+    "read_set",
+    "write_set",
+    "impact_set",
+    "core_impact_set",
+    "depends_on",
+    "acceptance_checks",
+    "writing_lease",
+    "review_level"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "pattern": "^TASK-[0-9]{3,}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "owner": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+    },
+    "status": {
+      "enum": [
+        "proposed",
+        "ready",
+        "assigned",
+        "in_progress",
+        "blocked",
+        "review_ready",
+        "review_failed",
+        "approved",
+        "integrated",
+        "closed"
+      ]
+    },
+    "read_set": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "write_set": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "impact_set": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "core_impact_set": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "depends_on": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^TASK-[0-9]{3,}$"
+      },
+      "uniqueItems": true
+    },
+    "acceptance_checks": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "writing_lease": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_write": {
+      "type": "boolean",
+      "default": true
+    },
+    "priority": {
+      "enum": [
+        "low",
+        "normal",
+        "high",
+        "critical"
+      ],
+      "default": "normal"
+    },
+    "updated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "review_level": {
+      "enum": [
+        "standard",
+        "high-risk"
+      ]
+    },
+    "review_tree_hash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "default": null
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "preset_id": "plan-a-gpt-antigravity-2026-07",
+  "roles": {
+    "coordinator": {
+      "provider": "openai",
+      "runtime_kind": "model",
+      "runtime_id": "gpt-5.6-sol",
+      "reasoning_effort": "max",
+      "required": true
+    },
+    "graph-analyst": {
+      "provider": "openai",
+      "runtime_kind": "model",
+      "runtime_id": "gpt-5.6-terra",
+      "reasoning_effort": "high",
+      "required": true
+    },
+    "worker-a": {
+      "provider": "openai",
+      "runtime_kind": "model",
+      "runtime_id": "gpt-5.6-terra",
+      "reasoning_effort": "high",
+      "required": true
+    },
+    "worker-b": {
+      "provider": "openai",
+      "runtime_kind": "model",
+      "runtime_id": "gpt-5.6-terra",
+      "reasoning_effort": "high",
+      "required": true
+    },
+    "independent-reviewer": {
+      "provider": "google",
+      "runtime_kind": "managed-agent",
+      "runtime_id": "antigravity-preview-05-2026",
+      "reasoning_effort": "managed",
+      "required": true
+    }
+  },
+  "review_passes": [
+    {
+      "pass_id": "independent",
+      "role": "independent-reviewer",
+      "mode": "compliance",
+      "required": true,
+      "fresh_session": true,
+      "inherit_prior_review": false
+    },
+    {
+      "pass_id": "adversarial",
+      "role": "independent-reviewer",
+      "mode": "adversarial",
+      "required": false,
+      "fresh_session": true,
+      "inherit_prior_review": false,
+      "risk_triggers": [
+        "role-policy",
+        "schema",
+        "orchestration",
+        "security-boundary",
+        "release-critical"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,547 @@
+{
+  ".claude-plugin/marketplace.json": {
+    "mtime": 1784077947.9812624,
+    "ast_hash": "6ae48cc7189ff882b4280e196ee83573",
+    "semantic_hash": ""
+  },
+  ".codex/hooks.json": {
+    "mtime": 1784078535.177305,
+    "ast_hash": "11f1cf9db558549e0f0956f7c9473967",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/.agents/templates/decision.json": {
+    "mtime": 1784127600.0,
+    "ast_hash": "49e4051e866c408173199800b1b672ca",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/.agents/templates/goal.json": {
+    "mtime": 1784185459.9519725,
+    "ast_hash": "e8ebbe33efba6988f837e2614c80c732",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/.agents/templates/handoff.json": {
+    "mtime": 1784127600.0,
+    "ast_hash": "3e8809d03e511570770884513fd76963",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/.agents/templates/message.json": {
+    "mtime": 1784127600.0,
+    "ast_hash": "a0e4a56cf6fb53226334d0731e6f24c1",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/.agents/templates/report.json": {
+    "mtime": 1784186185.7170498,
+    "ast_hash": "52321579fe98d158e61373e97ca854ed",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/.agents/templates/task.json": {
+    "mtime": 1784127600.0,
+    "ast_hash": "fcd6093b747971a906863a34c0d5b2be",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/agent-models.json": {
+    "mtime": 1784127600.0,
+    "ast_hash": "4a78d2531e70340cfaddf387d8be9a19",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/cogem.config.json": {
+    "mtime": 1784185759.0818737,
+    "ast_hash": "2c71b04ca427cc899b9853e8b585fdc2",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/model-presets/plan-a-gpt-antigravity.json": {
+    "mtime": 1784127600.0,
+    "ast_hash": "d6a93bf7abc1865706f5ad2a946f60d6",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/pyproject.toml": {
+    "mtime": 1784185759.0838737,
+    "ast_hash": "ab4f44bd480d82c3b1f10ca7d7156569",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/scripts/cogem.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "ce17587c4eaf6c9693b51847914878dc",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/scripts/package_kit.py": {
+    "mtime": 1784185759.0868733,
+    "ast_hash": "1aff1bfa51913703e78b5ce0cdefcd4a",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/scripts/run_tests.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "824fa20ba515a27149e039d44894857d",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/schemas/config.schema.json": {
+    "mtime": 1784127600.0,
+    "ast_hash": "2588b9d4449044a0f0e38c5caa7aa0b7",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/schemas/decision.schema.json": {
+    "mtime": 1784127600.0,
+    "ast_hash": "ac21e03b2aebe9ae2a136c5730c0213e",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/schemas/goal.schema.json": {
+    "mtime": 1784185459.9539742,
+    "ast_hash": "78bd2be1888b6d12c8e27f1e3e3f9f45",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/schemas/handoff.schema.json": {
+    "mtime": 1784127600.0,
+    "ast_hash": "408e12576a828fcf297a84e57c7a9c47",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/schemas/message.schema.json": {
+    "mtime": 1784127600.0,
+    "ast_hash": "e1cd09ca47486a92189ae11735de6346",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/schemas/model-policy.schema.json": {
+    "mtime": 1784127600.0,
+    "ast_hash": "8f52b2f55273ba92d1206e0697759117",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/schemas/model-preset.schema.json": {
+    "mtime": 1784127600.0,
+    "ast_hash": "44ae22fb82c005f6e5e594755dc1fc98",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/schemas/project-graph.schema.json": {
+    "mtime": 1784127600.0,
+    "ast_hash": "9b3e6b9bc5d4ca1cae653005dfdba1c9",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/schemas/report.schema.json": {
+    "mtime": 1784186315.3284192,
+    "ast_hash": "c0b7350923492bc91d57029c67ba6e3a",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/schemas/scope-snapshot.schema.json": {
+    "mtime": 1784127600.0,
+    "ast_hash": "2bd7bbfcad23881ba1541e975d4ff42f",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/schemas/task.schema.json": {
+    "mtime": 1784127600.0,
+    "ast_hash": "56612ffd380a6967d7b86bf0a1f8f4db",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/scripts/cogem.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "098b675ebd4040481ebc0eac8436e7a6",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/src/cogem/__init__.py": {
+    "mtime": 1784185275.3435571,
+    "ast_hash": "e5bf745980f1e31101b58e9f75dfcd6a",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/src/cogem/__main__.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "5109ab95441454c3d40c9321c4c146b7",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/src/cogem/cli.py": {
+    "mtime": 1784185269.8996077,
+    "ast_hash": "5f707719e5c718c45480d82a500955fd",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/src/cogem/comm.py": {
+    "mtime": 1784186303.6814685,
+    "ast_hash": "76f5f4fd06946b7908330d2f150a773b",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/src/cogem/config.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "b77ae678996d8d2cbf0ccf42867c03f9",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/src/cogem/contracts.py": {
+    "mtime": 1784186303.669208,
+    "ast_hash": "40715afee1d7830302e14fa43f79a2da",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/src/cogem/dispatch.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "f8b15ab0dcf47400c7f4ffc699587e41",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/src/cogem/evidence.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "654224eadb643a1ed616301547bda471",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/src/cogem/goal.py": {
+    "mtime": 1784186303.6752076,
+    "ast_hash": "fa13e80c70d2eae93aa8c1479d1c05de",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/src/cogem/graph.py": {
+    "mtime": 1784185286.127263,
+    "ast_hash": "a01870557faf41d7ec573ce1546f7613",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/src/cogem/model_policy.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "5d7eb6726ccc68158ac977b4c37623ac",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/src/cogem/parallel.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "07901ce461ed39e70ff29f87e7d762aa",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/src/cogem/scope.py": {
+    "mtime": 1784186185.7120447,
+    "ast_hash": "c10f217ff133f066075a0f90803aff8b",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/src/cogem/skill_init.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "6d4baaac8030ef1f41aca460bf30b556",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/src/cogem/skill_policy.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "150b1a91a4df1ae297509860a047f0b4",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/src/cogem/state.py": {
+    "mtime": 1784185217.7470102,
+    "ast_hash": "efe5048ea54407a71b957d5910870241",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/src/cogem/task_policy.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "5b5feefda523e7a4cfe490411bad674d",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/src/cogem/validation.py": {
+    "mtime": 1784185345.666291,
+    "ast_hash": "016f6091a0d2791101d0cea2bcc11bb2",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/fixtures/sample_project/src/app.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "d933ffed298743d2534e86d317b1c6bd",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/test_cli.py": {
+    "mtime": 1784185149.5654943,
+    "ast_hash": "bc276f199467cbbfe9c08dbf552c4325",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/test_comm.py": {
+    "mtime": 1784186046.8046865,
+    "ast_hash": "d02420416b55cdb7920913175f6e1531",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/test_contracts.py": {
+    "mtime": 1784186303.6661925,
+    "ast_hash": "365c5280cd50065ba33fefb6676ac1b9",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/test_dispatch.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "2888118658265cd298fbcfb668bba036",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/test_distribution.py": {
+    "mtime": 1784185149.5784926,
+    "ast_hash": "5dff712d89e0a14519812bb078a83606",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/test_evidence.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "904c8d8e47d6747b6d8d3cefd3aa7117",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/test_goal.py": {
+    "mtime": 1784185955.5848806,
+    "ast_hash": "944fef16bfba5b5a1ed76120c3e34450",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/test_graph.py": {
+    "mtime": 1784185149.5724914,
+    "ast_hash": "80ff0bdc6c62f2c361dc92370a9e6f9c",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/test_model_policy.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "7bf4141166219e4d42f65effd8be5303",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/test_package.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "6bddb9a95effe4c54e1d1fc990096295",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/test_parallel.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "c92e0e1d95597908a6417ef323a94d2e",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/test_scope.py": {
+    "mtime": 1784186174.1999495,
+    "ast_hash": "273c605ac7dfb6b64cbc609dfd13e308",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/test_skill_init.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "c359b321a96a5a86074de37e5ea6b396",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/test_skill_policy.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "e6ba313910a6fdc7b50003897a1ca265",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/test_task_policy.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "f99d9f191e54878fe970dee5078cda65",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/test_test_runner.py": {
+    "mtime": 1784127600.0,
+    "ast_hash": "fc264ef0e5bc14efa17f8b1969d33ae8",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/test_validation.py": {
+    "mtime": 1784185149.575493,
+    "ast_hash": "d98d7feac8a9166b5df4d905b819b73f",
+    "semantic_hash": ""
+  },
+  "plugins/clgem/.claude-plugin/plugin.json": {
+    "mtime": 1784077947.9832609,
+    "ast_hash": "c73ecfd3b7730ecb61dc500e0dc68ae7",
+    "semantic_hash": ""
+  },
+  "AGENTS.md": {
+    "mtime": 1784078499.3817847,
+    "ast_hash": "21ceb6533048be51308e69e7b74a35cf",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1784077947.9822595,
+    "ast_hash": "1acb35db590bf47c8c0ebd4fbf56b4f8",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/plans/2026-07-15-graphify-cross-review.md": {
+    "mtime": 1784079953.0249321,
+    "ast_hash": "d6971c6e475f6cf8e526885ea1f8afbb",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/specs/2026-07-15-graphify-cross-review-design.md": {
+    "mtime": 1784079953.0219321,
+    "ast_hash": "88916aa366805a6744bc7fd8edab2495",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/.agents/README.md": {
+    "mtime": 1784186303.6784387,
+    "ast_hash": "8585cd883e79f851db972c0ed0fb42e0",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/AGENTS.md": {
+    "mtime": 1784185573.0404334,
+    "ast_hash": "16dd3c6e0efe69429c9eaf0efe6135dc",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/Comm.md": {
+    "mtime": 1784186409.0405874,
+    "ast_hash": "f75f0a96a9077603f16cdbcbe5bffc1b",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/README.md": {
+    "mtime": 1784185788.711135,
+    "ast_hash": "55d11c6804ff2efdeb164554a8814ede",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/docs/adoption-guide.md": {
+    "mtime": 1784127600.0,
+    "ast_hash": "4d87bcbec8edc4f371cdcf8fb668010e",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/docs/agent-model.md": {
+    "mtime": 1784127600.0,
+    "ast_hash": "ddba71f0572d351974d65711321cc116",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/docs/agent-roles.md": {
+    "mtime": 1784185741.6556106,
+    "ast_hash": "032e08315f9b759bb749fea79e268df1",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/docs/architecture.md": {
+    "mtime": 1784185741.6516104,
+    "ast_hash": "73cc0306560da01cb9c3488953305d77",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/docs/execution-workflow.md": {
+    "mtime": 1784185741.6596115,
+    "ast_hash": "df8415c66901cff83bcfbf4d245b43e4",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/docs/parallelization-policy.md": {
+    "mtime": 1784127600.0,
+    "ast_hash": "402790b367c8118e6a22dfb2d6aa06ba",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/docs/release-notes-3.0.0.md": {
+    "mtime": 1784127600.0,
+    "ast_hash": "ffddfaa8bc7cd3f57e688b5e6de13094",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/docs/release-notes-4.0.0.md": {
+    "mtime": 1784127600.0,
+    "ast_hash": "4da4ec0c30c4e4acf8b3e094150e1ae9",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/docs/release-notes-5.0.0.md": {
+    "mtime": 1784185741.6656232,
+    "ast_hash": "613faff1df962807dcb5e68b561c08ad",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/docs/skill-authoring.md": {
+    "mtime": 1784127600.0,
+    "ast_hash": "baa646ec71492dc33363209d3a1e3eb5",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/docs/superpowers/plans/2026-07-16-cogem-3.0-implementation.md": {
+    "mtime": 1784127600.0,
+    "ast_hash": "6ec324fff1f29e0121b7218ad2021648",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/docs/superpowers/plans/2026-07-16-cogem-4.0-implementation.md": {
+    "mtime": 1784127600.0,
+    "ast_hash": "4a3ffdfa703b9c0211c5b8dacccc8a50",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/docs/superpowers/specs/2026-07-16-cogem-3.0-design.md": {
+    "mtime": 1784127600.0,
+    "ast_hash": "53da4b28b4ac970067b0866306849ebb",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/docs/superpowers/specs/2026-07-16-cogem-4.0-design.md": {
+    "mtime": 1784127600.0,
+    "ast_hash": "8cf1f3803b7e3b3c12c7edf425c6e11e",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/docs/validation-policy.md": {
+    "mtime": 1784185741.6636097,
+    "ast_hash": "1ce60dc6486c4ab5fd8c0b456c610e81",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/model-presets/README.md": {
+    "mtime": 1784127600.0,
+    "ast_hash": "26bf225d5ae32e71d2b43e822e0c7a65",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/SKILL.md": {
+    "mtime": 1784185459.957977,
+    "ast_hash": "3e54c217ae22c7b5c43c7c549ac1869a",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/agents/openai.yaml": {
+    "mtime": 1784185459.9589784,
+    "ast_hash": "2440d0fa1acb25386a5452339c1343be",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/manifest.txt": {
+    "mtime": 1784185459.957977,
+    "ast_hash": "57cc8dddf2b3328ce94e8d262b9ddc8e",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/references/agent-model.md": {
+    "mtime": 1784127600.0,
+    "ast_hash": "5260f09dc64cac76fc6acf30bc249b30",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/references/commands.md": {
+    "mtime": 1784185459.9609766,
+    "ast_hash": "045ba2a951b1192c41475081f8c1867e",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/references/communication-protocol.md": {
+    "mtime": 1784185459.9599767,
+    "ast_hash": "99460113cf917e5324fdeaf803653125",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/references/graph-model.md": {
+    "mtime": 1784127600.0,
+    "ast_hash": "55b98c05be07b1489b788b93c0080ba2",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/references/leader-loop.md": {
+    "mtime": 1784185459.9559734,
+    "ast_hash": "a42b64c5b7dfdbf657a355cc5394b683",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/references/parallel-safety.md": {
+    "mtime": 1784127600.0,
+    "ast_hash": "a01cccbf06ec1daec7a84c5a75768cae",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/references/skill-authoring.md": {
+    "mtime": 1784127600.0,
+    "ast_hash": "77c9840c951c06e82d3506ed598c20f5",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/skills/cogem/tests/pressure-scenarios.md": {
+    "mtime": 1784185459.9609766,
+    "ast_hash": "fa64c583b029b869995052ff3e9f1a2c",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/fixtures/sample_project/README.md": {
+    "mtime": 1784127600.0,
+    "ast_hash": "ccfd8b3226c41ab30d795320c2e999f9",
+    "semantic_hash": ""
+  },
+  "multi-agent-graphify-kit/tests/fixtures/sample_project/docs/architecture.md": {
+    "mtime": 1784127600.0,
+    "ast_hash": "a213736300356e656599d4f894eb1478",
+    "semantic_hash": ""
+  },
+  "plugins/clgem/skills/clgem/SKILL.md": {
+    "mtime": 1784077947.9852614,
+    "ast_hash": "67a21aa5e9adff7fd4b5132c7ee8230f",
+    "semantic_hash": ""
+  },
+  "plugins/clgem/skills/clgem/assets/Comm.template.md": {
+    "mtime": 1784077947.9862611,
+    "ast_hash": "ee38dd187efd92684be7276f9d208e75",
+    "semantic_hash": ""
+  },
+  "plugins/clgem/skills/clgem/assets/comm-index.template.md": {
+    "mtime": 1784077947.9872613,
+    "ast_hash": "4af74eca71310a7516f647b1a58d4de2",
+    "semantic_hash": ""
+  },
+  "plugins/clgem/skills/clgem/assets/comm-summary.template.md": {
+    "mtime": 1784077947.9872613,
+    "ast_hash": "1b8341f0bff091f0ed58858fb2a363af",
+    "semantic_hash": ""
+  },
+  "plugins/clgem/skills/clgem/assets/directives.template.md": {
+    "mtime": 1784077947.9882605,
+    "ast_hash": "a7eb698741f0bb3f4539a1d1e7531a7e",
+    "semantic_hash": ""
+  },
+  "plugins/clgem/skills/clgem/references/agents.md": {
+    "mtime": 1784077947.9892597,
+    "ast_hash": "51c8ff1858a3ddeab90fc58f3b8af30d",
+    "semantic_hash": ""
+  },
+  "plugins/clgem/skills/clgem/references/codex-review.md": {
+    "mtime": 1784077947.990261,
+    "ast_hash": "35c7fef0322fe1cf28f2d5850d0458c4",
+    "semantic_hash": ""
+  },
+  "plugins/clgem/skills/clgem/references/graphify-integration.md": {
+    "mtime": 1784077947.991261,
+    "ast_hash": "adbe9b7389c474b73dcbf8a81a682962",
+    "semantic_hash": ""
+  }
+}

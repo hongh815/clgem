@@ -1,0 +1,29 @@
+{
+  "task_id": "TASK-000",
+  "title": "Example scoped task",
+  "owner": "worker-a",
+  "status": "ready",
+  "read_set": [
+    "docs/architecture.md"
+  ],
+  "write_set": [
+    "docs/example-output.md"
+  ],
+  "impact_set": [
+    "README.md"
+  ],
+  "core_impact_set": [
+    "README.md"
+  ],
+  "depends_on": [],
+  "acceptance_checks": [
+    "python scripts/cogem.py scope-check TASK-000 --root .",
+    "python scripts/cogem.py validate --root ."
+  ],
+  "writing_lease": "lease-worker-a-task-000",
+  "source_write": true,
+  "priority": "normal",
+  "updated_at": "2026-07-15T10:15:00+09:00",
+  "review_level": "standard",
+  "review_tree_hash": null
+}

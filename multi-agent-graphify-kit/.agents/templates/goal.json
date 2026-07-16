@@ -1,0 +1,20 @@
+{
+  "goal_id": "GOAL-000",
+  "objective": "Deliver the outcome requested by the user.",
+  "status": "active",
+  "iteration": 1,
+  "criteria": [
+    {
+      "criterion_id": "CRIT-001",
+      "description": "The requested behavior is implemented and verified.",
+      "status": "pending",
+      "evidence": []
+    }
+  ],
+  "task_ids": [],
+  "current_gaps": [],
+  "review_tree_hash": null,
+  "blocker": null,
+  "created_at": "2026-07-16T16:00:00+09:00",
+  "updated_at": "2026-07-16T16:00:00+09:00"
+}
